@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 void rotation(int a[], int r, int n,int d){
 	int temp,i,j;
 	
@@ -30,6 +30,29 @@ void rotation(int a[], int r, int n,int d){
 		printf("%d ",a[i]);
 	}
 }
+*/
+void rotate(int* nums, int numsSize, int k) {
+    if(numsSize==0)
+        return ;
+    if(k==0)
+        return ;
+    k=k%numsSize;
+    if(k>numsSize)
+        return ;
+    int *temp=(int*)malloc(k*sizeof(int));
+    int j=0;
+    for(int i=numsSize-k;i<numsSize;i++){
+        temp[j]=nums[i];
+        j++;
+    }
+    for(int i=numsSize-k-1;i>=0;i--){
+        nums[i+k]=nums[i];
+    }
+    for(int i=0;i<j;i++){
+        nums[i]=temp[i];
+    }
+    
+}
 int main(){
 	int arr[100],n,i,r,d;
 	
@@ -41,8 +64,11 @@ int main(){
 	}
 	printf("How many rotation do you want? ");
 	scanf("%d",&r);
-	printf("Mention the direction of rotation (1 for left and 0 for right): ");
-	scanf("%d",&d);
-	rotation(arr,r,n,d);
-	
+	//printf("Mention the direction of rotation (1 for left and 0 for right): ");
+	//scanf("%d",&d);
+	rotate(arr, n, r);
+	printf("The Array After rotation:\n");
+	for(i=0;i<n;i++){
+		printf("%d",arr[i]);
+	}
 }
